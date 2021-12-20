@@ -1,6 +1,7 @@
 package com.OzUFlix.CS320.Service;
 
 import com.OzUFlix.CS320.Model.Penalty;
+import com.OzUFlix.CS320.Repository.PenaltyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,13 +10,13 @@ import java.util.List;
 @Service
 public class PenaltyService {
     @Autowired
-    PenaltyService penaltyService;
+    PenaltyRepository penaltyRepository;
 
-    public Penalty save(Penalty penalty){ return penaltyService.save(penalty); }
+    public Penalty save(Penalty penalty){ return penaltyRepository.save(penalty); }
 
-    public List<Penalty> findAll(){ return penaltyService.findAll();}
+    public List<Penalty> findAll(){ return penaltyRepository.findAll();}
 
-    public Penalty findById(int id){ return penaltyService.findById(id); }
+    public Penalty findById(int id){ return penaltyRepository.findById(id); }
 
-    public void deleteById(int id){ penaltyService.deleteById(id); }
+    public void deleteById(int id){ penaltyRepository.deleteById(id); }
 }

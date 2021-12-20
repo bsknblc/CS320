@@ -34,4 +34,6 @@ public class AvailableController {
     public Available saveAvailableMovie(@RequestBody Available availableMovie) {
         return availableMovieService.save(availableMovie);
     }
+
 }
+

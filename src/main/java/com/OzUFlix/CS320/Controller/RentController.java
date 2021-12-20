@@ -27,6 +27,5 @@ public class RentController {
     public Rent saveRent(@RequestBody Rent Rent){
         return RentService.save(Rent);
     }
-
-
 }
+
