@@ -1,6 +1,7 @@
 package com.OzUFlix.CS320.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -11,23 +12,31 @@ import java.util.Date;
 public class Rent {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     private int id;
 
     @ManyToOne
     @NotNull
-    @Column(name = "USER")
+    @JsonIgnore
     private User user;
 
     @ManyToOne
     @NotNull
-    @Column(name = "MOVIE")
+    @JsonIgnore
     private Movie movie;
 
     @NotNull
     @Column(name = "DATE")
     private Date date;
+
+    @OneToOne
+    @JsonIgnore
+    private Penalty penalty;
+
+    @OneToOne
+    @JsonIgnore
+    private Return_Movie return_movie;
 
     public int getId() {
         return id;

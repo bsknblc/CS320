@@ -1,6 +1,7 @@
 package com.OzUFlix.CS320.Service;
 
 import com.OzUFlix.CS320.Model.Movie;
+import com.OzUFlix.CS320.Repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,13 +10,13 @@ import java.util.List;
 @Service
 public class MovieService {
     @Autowired
-    MovieService movieService;
+    MovieRepository movieRepository;
 
-    public Movie save(Movie movie){ return movieService.save(movie); }
+    public Movie save(Movie movie){ return movieRepository.save(movie); }
 
-    public List<Movie> findAll(){ return movieService.findAll();}
+    public List<Movie> findAll(){ return movieRepository.findAll();}
 
-    public Movie findById(int id){ return movieService.findById(id); }
+    public Movie findById(int id){ return movieRepository.findById(id); }
 
-    public void deleteById(int id){ movieService.deleteById(id); }
+    public void deleteById(int id){ movieRepository.deleteById(id); }
 }

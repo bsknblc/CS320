@@ -1,5 +1,6 @@
 package com.OzUFlix.CS320.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.util.List;
 public class Movie {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     private int id;
 
@@ -19,24 +20,23 @@ public class Movie {
     @Column(name = "NAME")
     private String name;
 
+    @JsonIgnore
     @ManyToOne
     @NotNull
-    @Column(name = "DIRECTOR")
     private Director director;
 
+    @JsonIgnore
     @ManyToOne
     @NotNull
-    @Column(name = "TOPIC")
     private Topic topic;
 
+    @JsonIgnore
     @ManyToOne
     @NotNull
-    @Column(name = "AVAILABLE")
     private Available available;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "movie")
-    @NotNull
-    @Column(name = "RENT")
     private List<Rent> rents = new ArrayList<Rent>();
 
     public int getId() {

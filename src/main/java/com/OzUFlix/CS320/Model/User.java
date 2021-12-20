@@ -1,5 +1,6 @@
 package com.OzUFlix.CS320.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     private int id;
 
@@ -24,22 +25,19 @@ public class User {
     private String password;
 
     @NotNull
-    @Column(name = "USER_TYPE") //0 is manager, 1 is customer
+    @Column(name = "USER_TYPE", columnDefinition = "integer default '1'") //0 is manager, 1 is customer
     private int userType;
 
     @OneToMany(mappedBy = "user")
-    @NotNull
-    @Column(name = "RENT")
+    @JsonIgnore
     private List<Rent> rents = new ArrayList<Rent>();
 
     @OneToMany(mappedBy = "user")
-    @NotNull
-    @Column(name = "RETURN_MOVIE")
+    @JsonIgnore
     private List<Return_Movie> return_movies = new ArrayList<Return_Movie>();
 
     @OneToMany(mappedBy = "user")
-    @NotNull
-    @Column(name = "PENALTY")
+    @JsonIgnore
     private List<Penalty> penalties = new ArrayList<Penalty>();
 
     public int getId() {
