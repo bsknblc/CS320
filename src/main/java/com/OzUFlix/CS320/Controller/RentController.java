@@ -28,3 +28,4 @@ public class RentController {
         return RentService.save(Rent);
     }
 }
+
