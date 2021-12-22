@@ -1,5 +1,6 @@
 package com.OzUFlix.CS320.Service;
 
+import com.OzUFlix.CS320.Model.Available;
 import com.OzUFlix.CS320.Model.Movie;
 import com.OzUFlix.CS320.Repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,4 +20,6 @@ public class MovieService {
     public Movie findById(int id){ return movieRepository.findById(id); }
 
     public void deleteById(int id){ movieRepository.deleteById(id); }
+
+    public List<Movie> searchMovie(int available){return  movieRepository.searchMovie(available);}
 }

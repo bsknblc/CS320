@@ -20,6 +20,13 @@ public class MovieController {
     @GetMapping("/{movie-id}")
     public Movie getMovieById(@PathVariable("movie-id") int id) {return movieService.findById(id); }
 
+    @GetMapping("/search")
+    public List<Movie> searchMovie() {return movieService.findAll(); }
+
+    @PostMapping("/search")
+    public List<Movie> searchMovie(@RequestParam int available) {
+        return movieService.searchMovie(available); }
+
     @DeleteMapping("/{movie-id}")
     public void deleteById(@PathVariable("movie-id") int id){
         movieService.deleteById(id);
