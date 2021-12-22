@@ -46,6 +46,14 @@ public class Penalty {
         this.rent = rent;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Return_Movie getReturn_movie() {
         return return_movie;
     }

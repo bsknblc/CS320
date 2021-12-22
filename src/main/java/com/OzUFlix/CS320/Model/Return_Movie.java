@@ -57,4 +57,19 @@ public class Return_Movie {
         this.date = date;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Penalty getPenalty() {
+        return penalty;
+    }
+
+    public void setPenalty(Penalty penalty) {
+        this.penalty = penalty;
+    }
 }

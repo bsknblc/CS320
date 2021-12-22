@@ -69,4 +69,20 @@ public class Rent {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    public Penalty getPenalty() {
+        return penalty;
+    }
+
+    public void setPenalty(Penalty penalty) {
+        this.penalty = penalty;
+    }
+
+    public Return_Movie getReturn_movie() {
+        return return_movie;
+    }
+
+    public void setReturn_movie(Return_Movie return_movie) {
+        this.return_movie = return_movie;
+    }
 }

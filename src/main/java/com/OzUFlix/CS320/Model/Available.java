@@ -39,4 +39,12 @@ public class Available {
     public void setInfo(int info) {
         this.info = info;
     }
+
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
 }

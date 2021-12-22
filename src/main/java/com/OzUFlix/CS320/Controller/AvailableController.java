@@ -1,5 +1,6 @@
 package com.OzUFlix.CS320.Controller;
 
+import com.OzUFlix.CS320.DTO.AvailableDTO;
 import com.OzUFlix.CS320.Model.Available;
 import com.OzUFlix.CS320.Service.AvailableService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,12 @@ public class AvailableController {
     AvailableService availableMovieService;
 
     @GetMapping
-    public List<Available> findAll() {
+    public List<AvailableDTO> findAll() {
         return availableMovieService.findAll();
     }
 
     @GetMapping("/{available-id}")
-    public Available getAvailableById(@PathVariable("available-id") int id) {
+    public AvailableDTO getAvailableById(@PathVariable("available-id") int id) {
         return availableMovieService.findById(id);
     }
 
