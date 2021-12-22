@@ -1,7 +1,7 @@
 package com.OzUFlix.CS320.Controller;
-
 import com.OzUFlix.CS320.DTO.DirectorDTO;
 import com.OzUFlix.CS320.Model.Director;
+import com.OzUFlix.CS320.Model.Movie;
 import com.OzUFlix.CS320.Service.DirectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +31,7 @@ public class DirectorController {
     }
 
     @PostMapping
-    public Director saveMovie(@RequestBody Director director) {
+    public Movie.Director saveMovie(@RequestBody Movie.Director director) {
         return directorService.save(director);
     }
 }
