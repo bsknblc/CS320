@@ -33,5 +33,5 @@ public class DirectorController {
     public Director saveMovie(@RequestBody Director director) {
         return directorService.save(director);
     }
-
 }
+
