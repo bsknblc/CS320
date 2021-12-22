@@ -40,4 +40,12 @@ public class Topic {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
 }

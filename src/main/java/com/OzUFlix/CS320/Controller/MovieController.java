@@ -1,5 +1,6 @@
 package com.OzUFlix.CS320.Controller;
 
+import com.OzUFlix.CS320.DTO.MovieDTO;
 import com.OzUFlix.CS320.Model.Movie;
 import com.OzUFlix.CS320.Service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,17 @@ public class MovieController {
     MovieService movieService;
 
     @GetMapping
-    public List<Movie> findAll(){ return movieService.findAll(); }
+    public List<MovieDTO> findAll(){ return movieService.findAll(); }
 
     @GetMapping("/{movie-id}")
-    public Movie getMovieById(@PathVariable("movie-id") int id) {return movieService.findById(id); }
+    public MovieDTO getMovieById(@PathVariable("movie-id") int id) {return movieService.findById(id); }
+
+    @GetMapping("/search")
+    public List<MovieDTO> searchMovie() {return movieService.findAll(); }
+
+    @PostMapping("/search")
+    public List<Movie> searchMovie(@RequestParam int available) {
+        return movieService.searchMovie(available); }
 
     @DeleteMapping("/{movie-id}")
     public void deleteById(@PathVariable("movie-id") int id){

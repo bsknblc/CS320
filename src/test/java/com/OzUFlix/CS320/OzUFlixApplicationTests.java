@@ -72,12 +72,12 @@ class OzUFlixApplicationTests {
 
 		Return_Movie returnM = new Return_Movie();
 		returnM.setRent(rent);
+		returnM.setUser(user);
 		returnM.setDate(new java.util.Date());
 
 		Penalty penalty = new Penalty();
 		penalty.setRent(rent);
 		penalty.setReturn_movie(returnM);
-
 
 		availableService.save(available);
 		availableService.save(notAvailable);
