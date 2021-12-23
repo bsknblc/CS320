@@ -21,12 +21,10 @@ public class MovieController {
     @GetMapping("/{movie-id}")
     public MovieDTO getMovieById(@PathVariable("movie-id") int id) {return movieService.findById(id); }
 
-    @GetMapping("/search")
-    public List<MovieDTO> searchMovie() {return movieService.findAll(); }
-
-    @PostMapping("/search")
-    public List<Movie> searchMovie(@RequestParam int available) {
-        return movieService.searchMovie(available); }
+    @GetMapping("/search/{movie-info}")
+    public List<MovieDTO> searchMovie(@PathVariable("movie-id") String movieInfo){
+        return movieService.searchMovie(movieInfo);
+    }
 
     @DeleteMapping("/{movie-id}")
     public void deleteById(@PathVariable("movie-id") int id){
