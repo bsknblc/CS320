@@ -1,5 +1,6 @@
 package com.OzUFlix.CS320;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.OzUFlix.CS320.Model.*;
 import com.OzUFlix.CS320.Service.*;
 import org.junit.jupiter.api.Test;
