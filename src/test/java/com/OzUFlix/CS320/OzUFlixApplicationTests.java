@@ -35,10 +35,6 @@ class OzUFlixApplicationTests {
 	PenaltyService penaltyService;
 
 	@Test
-	void contextLoads() {
-	}
-
-	@Test
 	public void testService() {
 		Available available = new Available();
 		available.setInfo(1);
