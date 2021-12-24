@@ -1,5 +1,19 @@
-import UserService from java/com.OzUFlix.CS320/Service/UserService;
+/*function validateForm() {
+    const loginForm = document.getElementById("login-form");
+    const loginButton = document.getElementById("login-form-submit");
+    const loginErrorMsg = document.getElementById("login-error-msg");
+    if (desc == null || desc == "") {
+        alert("Please enter course description!")
+        return false;
+    }
 
+    if (type== null || type== "0") {
+        alert("Please select course type!")
+        return false;
+    }
+    saveCourse();
+    return true;
+}*/
 const loginForm = document.getElementById("login-form");
 const loginButton = document.getElementById("login-form-submit");
 const loginErrorMsg = document.getElementById("login-error-msg");

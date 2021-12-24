@@ -34,10 +34,6 @@ public class Penalty {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public Rent getRent() {
         return rent;
     }
