@@ -29,7 +29,9 @@ public class UserService {
     @Autowired
     PenaltyRepository penaltyRepository;
 
-    public User save(User user){ return userRepository.save(user); }
+    public User save(User user){
+        user.setUserType(0);
+        return userRepository.save(user); }
 
     public List<UserDTO> findAll(){
         List<User> users = userRepository.findAll();
