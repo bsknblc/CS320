@@ -39,9 +39,8 @@ public class MovieController {
         movieService.deleteById(id);
     }
 
-    @PostMapping("/director/{director-id}/topic/{topic-id}/available/{available-id}/rent/{rent-id}")
-    public MovieDTO saveMovie(@RequestBody Movie movie, @PathVariable("director-id") int directorId, @PathVariable("topic-id") int topicId,
-                              @PathVariable("available-id") int availableId, @PathVariable("rent-id") int rentId) {
-        return movieService.saveMovie(movie, directorId, topicId, availableId, rentId);
+    @PostMapping("/director/{director-id}/topic/{topic-id}")
+    public MovieDTO saveMovie(@RequestBody Movie movie, @PathVariable("director-id") int directorId, @PathVariable("topic-id") int topicId) {
+        return movieService.saveMovie(movie, directorId, topicId);
     }
 }

@@ -77,21 +77,15 @@ public class MovieService {
 
     public void deleteById(int id){ movieRepository.deleteById(id); }
 
-    public MovieDTO saveMovie(Movie movie, int directorId, int topicId, int availableId, int rentId){
+    public MovieDTO saveMovie(Movie movie, int directorId, int topicId){
         Director director = directorRepository.findById(directorId);
         movie.setDirector(director);
 
         Topic topic = topicRepository.findById(topicId);
         movie.setTopic(topic);
 
-        Available available = availableRepository.findById(availableId);
+        Available available = availableRepository.findById(1);
         movie.setAvailable(available);
-
-        Rent rent = rentRepository.findById(rentId);
-        List<Rent> list = new ArrayList<>();
-        list.addAll(movie.getRents());
-        list.add(rent);
-        movie.setRents(list);
 
         movieRepository.save(movie);
         MovieDTO movieDTO = new MovieDTO(movie.getId(), movie.getName(), movie.getDirector(),movie.getTopic(),movie.getAvailable(),movie.getRents());
@@ -108,21 +102,11 @@ public class MovieService {
         topic.setMovies(listTopic);
         topicRepository.save(topic);
 
-        if(availableId==1){
-            Available availableNot = availableRepository.findById(availableId+1);
-            availableNot.getMovies().remove(movie);
-        }else{
-            Available availableNot = availableRepository.findById(availableId-1);
-            availableNot.getMovies().remove(movie);
-        }
         List<Movie> listAvailable = new ArrayList<>();
         listAvailable.addAll(available.getMovies());
         listAvailable.add(movie);
         available.setMovies(listAvailable);
         availableRepository.save(available);
-
-        rent.setMovie(movie);
-        rentRepository.save(rent);
 
         return movieDTO;
     }
