@@ -25,23 +25,9 @@ public class Return_MovieController {
     @DeleteMapping("/{Return_Movie-id}")
     public void deleteById(@PathVariable("Return_Movie-id") int id){ return_MovieService.deleteById(id); }
 
-    @PostMapping
-    public Return_Movie saveReturn_Movie(@RequestBody Return_Movie Return_Movie){
-        return return_MovieService.save(Return_Movie);
+    @PostMapping("/rent/{rent-id}")
+    public Return_MovieDTO saveReturnMovie(@RequestBody Return_Movie returnMovie, @PathVariable("rent-id") int rentId) {
+        return return_MovieService.saveReturnMovie(returnMovie, rentId);
     }
 
-    @PostMapping("/{returnmovie-id}/user/{user-id}")
-    public Return_MovieDTO saveReturnMovieUser(@PathVariable("returnmovie-id") int returnMovieId, @PathVariable("user-id") int userId) {
-        return return_MovieService.saveUser(returnMovieId, userId);
-    }
-
-    @PostMapping("/{returnmovie-id}/rent/{rent-id}")
-    public Return_MovieDTO saveReturnMovieRent(@PathVariable("returnmovie-id") int returnMovieId, @PathVariable("rent-id") int rentId) {
-        return return_MovieService.saveRent(returnMovieId, rentId);
-    }
-
-    @PostMapping("/{returnmovie-id}/penalty/{penalty-id}")
-    public Return_MovieDTO saveReturnMoviePenalty(@PathVariable("returnmovie-id") int returnMovieId, @PathVariable("penalty-id") int penaltyId) {
-        return return_MovieService.savePenalty(returnMovieId, penaltyId);
-    }
 }
