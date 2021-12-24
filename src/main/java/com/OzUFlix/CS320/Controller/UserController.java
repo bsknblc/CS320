@@ -28,4 +28,12 @@ public class UserController {
     public User saveUser(@RequestBody User user){
         return userService.save(user);
     }
+
+    @GetMapping("/signin")
+    public boolean getUserById(@RequestBody String body) {
+        String[] result = body.split("\\s+");
+        return userService.validateUser(result[0], result[1]);
+    }
+
+
 }
