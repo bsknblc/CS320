@@ -16,7 +16,7 @@ public class Available {
     @NotNull
     private int id;
 
-    @Column(name = "INFO", columnDefinition = "integer default '1'")
+    @Column(name = "INFO")
     @NotNull
     private int info;
 
