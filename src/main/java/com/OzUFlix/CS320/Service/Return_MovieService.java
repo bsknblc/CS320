@@ -31,7 +31,9 @@ public class Return_MovieService {
     @Autowired
     PenaltyRepository penaltyRepository;
 
-    public Return_Movie save(Return_Movie return_Movie){ return return_movieRepository.save(return_Movie); }
+    public Return_Movie save(Return_Movie return_Movie){
+        return_Movie.setDate(new Date());
+        return return_movieRepository.save(return_Movie); }
 
     public List<Return_MovieDTO> findAll(){
         List<Return_Movie> return_movies = return_movieRepository.findAll();
@@ -62,15 +64,6 @@ public class Return_MovieService {
         list.add(return_movie);
         user.setReturn_movies(list);
         userRepository.save(user);
-
-        return  return_movieDTO;
-    }
-
-    public Return_MovieDTO saveDate(int returnMovieId){
-        Return_Movie return_movie = return_movieRepository.findById(returnMovieId);
-        return_movie.setDate(new Date());
-        return_movieRepository.save(return_movie);
-        Return_MovieDTO return_movieDTO = new Return_MovieDTO(return_movie.getId(), return_movie.getUser(),return_movie.getDate(),return_movie.getRent(),return_movie.getPenalty());
 
         return  return_movieDTO;
     }

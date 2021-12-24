@@ -29,11 +29,6 @@ public class MovieService {
 
     public Movie save(Movie movie){ return movieRepository.save(movie); }
 
-    public List<MovieDTO> remove(int movieId){
-        movieRepository.delete(movieRepository.findById(movieId));
-        return this.findAll();
-    }
-
     public List<MovieDTO> findAll(){
         List<Movie> movies = movieRepository.findAll();
         List<MovieDTO> movieDTOs = new ArrayList<MovieDTO>();

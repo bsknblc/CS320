@@ -29,7 +29,9 @@ public class RentService {
     @Autowired
     Return_MovieRepository return_movieRepository;
 
-    public Rent save(Rent rent){ return rentRepository.save(rent); }
+    public Rent save(Rent rent){
+        rent.setDate(new Date());
+        return rentRepository.save(rent); }
 
     public List<RentDTO> findAll(){
         List<Rent> rents = rentRepository.findAll();
@@ -52,6 +54,7 @@ public class RentService {
         User user = userRepository.findById(userId);
         Rent rent = rentRepository.findById(rentId);
         rent.setUser(user);
+
         rentRepository.save(rent);
         RentDTO rentDTO = new RentDTO(rent.getId(),rent.getUser(),rent.getMovie(),rent.getDate(), rent.getPenalty(),rent.getReturn_movie());
 
@@ -80,15 +83,6 @@ public class RentService {
             return  rentDTO;
         }
         return  null;
-    }
-
-    public RentDTO saveDate(int rentId){
-        Rent rent = rentRepository.findById(rentId);
-        rent.setDate(new Date());
-        rentRepository.save(rent);
-        RentDTO rentDTO = new RentDTO(rent.getId(),rent.getUser(),rent.getMovie(),rent.getDate(), rent.getPenalty(),rent.getReturn_movie());
-
-        return  rentDTO;
     }
 
     public RentDTO savePenalty(int rentId, int penaltyId){

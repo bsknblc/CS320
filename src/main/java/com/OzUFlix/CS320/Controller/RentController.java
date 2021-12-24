@@ -41,7 +41,19 @@ public class RentController {
         return rentService.saveMovie(rentId, movieId);
     }
 
+    @PostMapping("/{rent-id}/penalty/{penalty-id}")
+    public RentDTO saveRentPenalty(@PathVariable("rent-id") int rentId, @PathVariable("penaly-id") int penaltyId) {
+        return rentService.savePenalty(rentId, penaltyId);
+    }
+
+    @PostMapping("/{rent-id}/returnmovie/{returnmovie-id}")
+    public RentDTO saveRentReturnMovie(@PathVariable("rent-id") int rentId, @PathVariable("returnmovie-id") int returnMovieId) {
+        return rentService.saveReturnMovie(rentId, returnMovieId);
+    }
+
     @GetMapping("/most")
     public MovieDTO getMost() { return rentService.getMost(); }
+
+
 }
 
