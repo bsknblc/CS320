@@ -27,11 +27,11 @@ public class RentService {
     PenaltyRepository penaltyRepository;
 
     @Autowired
-    Return_MovieRepository return_movieRepository;
+    AvailableRepository availableRepository;
 
     public Rent save(Rent rent){
-        rent.setDate(new Date());
-        return rentRepository.save(rent); }
+        return rentRepository.save(rent);
+    }
 
     public List<RentDTO> findAll(){
         List<Rent> rents = rentRepository.findAll();
@@ -50,64 +50,46 @@ public class RentService {
 
     public void deleteById(int id){ rentRepository.deleteById(id); }
 
-    public RentDTO saveUser(int rentId, int userId){
+    public RentDTO saveRent(Rent rent, int userId, int movieId){
+        rent.setDate(new Date());
         User user = userRepository.findById(userId);
-        Rent rent = rentRepository.findById(rentId);
+        Movie movie = movieRepository.findById(movieId);
         rent.setUser(user);
+        rent.setMovie(movie);
 
         rentRepository.save(rent);
         RentDTO rentDTO = new RentDTO(rent.getId(),rent.getUser(),rent.getMovie(),rent.getDate(), rent.getPenalty(),rent.getReturn_movie());
 
-        List<Rent> list = new ArrayList<>();
-        list.addAll(user.getRents());
-        list.add(rent);
-        user.setRents(list);
+        List<Rent> listUser = new ArrayList<>();
+        listUser.addAll(user.getRents());
+        listUser.add(rent);
+        user.setRents(listUser);
         userRepository.save(user);
 
+        List<Rent> listMovie = new ArrayList<>();
+        listMovie.addAll(movie.getRents());
+        listMovie.add(rent);
+        movie.setRents(listMovie);
+
+        Available notAvailable = availableRepository.findById(2);
+        movie.setAvailable(notAvailable);
+        List<Movie> listN = notAvailable.getMovies();
+        listN.add(movie);
+        notAvailable.setMovies(listN);
+
+        Available available = availableRepository.findById(1);
+        movie.setAvailable(available);
+        List<Movie> listA = available.getMovies();
+        listA.remove(movie);
+        available.setMovies(listA);
+
+        movieRepository.save(movie);
+        availableRepository.save(available);
+        availableRepository.save(notAvailable);
+
         return  rentDTO;
     }
 
-    public RentDTO saveMovie(int rentId, int movieId){
-        Movie movie = movieRepository.findById(movieId);
-        if(movie.getAvailable().getInfo()==1) {
-            Rent rent = rentRepository.findById(rentId);
-            rent.setMovie(movie);
-            rentRepository.save(rent);
-            RentDTO rentDTO = new RentDTO(rent.getId(), rent.getUser(), rent.getMovie(), rent.getDate(), rent.getPenalty(), rent.getReturn_movie());
-
-            List<Rent> list = new ArrayList<>();
-            list.addAll(movie.getRents());
-            list.add(rent);
-            movie.setRents(list);
-            movieRepository.save(movie);
-            return  rentDTO;
-        }
-        return  null;
-    }
-
-    public RentDTO savePenalty(int rentId, int penaltyId){
-        Penalty penalty = penaltyRepository.findById(penaltyId);
-        Rent rent = rentRepository.findById(rentId);
-        rent.setPenalty(penalty);
-        rentRepository.save(rent);
-        RentDTO rentDTO = new RentDTO(rent.getId(),rent.getUser(),rent.getMovie(),rent.getDate(), rent.getPenalty(),rent.getReturn_movie());
-
-        penalty.setRent(rent);
-        penaltyRepository.save(penalty);
-        return  rentDTO;
-    }
-
-    public RentDTO saveReturnMovie(int rentId, int returnMovieId){
-        Return_Movie return_movie = return_movieRepository.findById(returnMovieId);
-        Rent rent = rentRepository.findById(rentId);
-        rent.setReturn_movie(return_movie);
-        rentRepository.save(rent);
-        RentDTO rentDTO = new RentDTO(rent.getId(),rent.getUser(),rent.getMovie(),rent.getDate(), rent.getPenalty(),rent.getReturn_movie());
-
-        return_movie.setRent(rent);
-        return_movieRepository.save(return_movie);
-        return  rentDTO;
-    }
 
     public MovieDTO getMost(){
         int max = 0;

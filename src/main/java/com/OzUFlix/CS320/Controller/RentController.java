@@ -3,6 +3,7 @@ package com.OzUFlix.CS320.Controller;
 import com.OzUFlix.CS320.DTO.MovieDTO;
 import com.OzUFlix.CS320.DTO.PenaltyDTO;
 import com.OzUFlix.CS320.DTO.RentDTO;
+import com.OzUFlix.CS320.Model.Available;
 import com.OzUFlix.CS320.Model.Rent;
 import com.OzUFlix.CS320.Service.RentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,33 +28,17 @@ public class RentController {
     public void deleteById(@PathVariable("Rent-id") int id){ rentService.deleteById(id); }
 
     @PostMapping
-    public Rent saveRent(@RequestBody Rent Rent){
-        return rentService.save(Rent);
+    public Rent save(Rent rent) {
+        return rentService.save(rent);
     }
 
-    @PostMapping("/{rent-id}/user/{user-id}")
-    public RentDTO saveRentUser(@PathVariable("rent-id") int rentId, @PathVariable("user-id") int userId) {
-        return rentService.saveUser(rentId, userId);
-    }
-
-    @PostMapping("/{rent-id}/movie/{movie-id}")
-    public RentDTO saveRentMovie(@PathVariable("rent-id") int rentId, @PathVariable("movie-id") int movieId) {
-        return rentService.saveMovie(rentId, movieId);
-    }
-
-    @PostMapping("/{rent-id}/penalty/{penalty-id}")
-    public RentDTO saveRentPenalty(@PathVariable("rent-id") int rentId, @PathVariable("penaly-id") int penaltyId) {
-        return rentService.savePenalty(rentId, penaltyId);
-    }
-
-    @PostMapping("/{rent-id}/returnmovie/{returnmovie-id}")
-    public RentDTO saveRentReturnMovie(@PathVariable("rent-id") int rentId, @PathVariable("returnmovie-id") int returnMovieId) {
-        return rentService.saveReturnMovie(rentId, returnMovieId);
+    @PostMapping("/user/{user-id}/movie/{movie-id}")
+    public RentDTO saveRent(@RequestBody Rent Rent, @PathVariable("user-id") int userId, @PathVariable("movie-id") int movieId) {
+        return rentService.saveRent(Rent, userId, movieId);
     }
 
     @GetMapping("/most")
     public MovieDTO getMost() { return rentService.getMost(); }
-
 
 }
 

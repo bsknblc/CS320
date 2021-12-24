@@ -25,6 +25,7 @@ public class User {
     private String password;
 
     @Column(name = "USER_TYPE", columnDefinition = "integer default '0'") //1 is manager, 0 is customer
+    @NotNull
     private int userType;
 
     @OneToMany(mappedBy = "user")

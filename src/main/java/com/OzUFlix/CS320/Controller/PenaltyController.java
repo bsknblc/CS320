@@ -26,23 +26,9 @@ public class PenaltyController {
     public void deleteById(@PathVariable("penalty-id") int id){ penaltyService.deleteById(id); }
 
     @PostMapping
-    public Penalty savePenalty(@RequestBody Penalty penalty){
+    public Penalty save(@RequestBody Penalty penalty){
         return penaltyService.save(penalty);
     }
 
-    @PostMapping("/{penalty-id}/user/{user-id}")
-    public PenaltyDTO savePenaltyUser(@PathVariable("penalty-id") int penaltyId, @PathVariable("user-id") int userId) {
-        return penaltyService.saveUser(penaltyId, userId);
-    }
-
-    @PostMapping("/{penalty-id}/rent/{rent-id}")
-    public PenaltyDTO savePenaltyRent(@PathVariable("penalty-id") int penaltyId, @PathVariable("rent-id") int rentId) {
-        return penaltyService.saveRent(penaltyId, rentId);
-    }
-
-    @PostMapping("/{penalty-id}/returnmovie/{returnmovie-id}")
-    public PenaltyDTO savePenaltyReturnMovie(@PathVariable("penalty-id") int penaltyId, @PathVariable("returnmovie-id") int returnMovieId) {
-        return penaltyService.saveReturnMovie(penaltyId, returnMovieId);
-    }
 }
 
