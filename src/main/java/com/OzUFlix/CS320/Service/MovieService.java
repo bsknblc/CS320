@@ -78,26 +78,36 @@ public class MovieService {
     public void deleteById(int id){ movieRepository.deleteById(id); }
 
     public MovieDTO saveMovie(Movie movie, int directorId, int topicId, int availableId, int rentId){
-        int movieId = movie.getId();
-
         Director director = directorRepository.findById(directorId);
         movie.setDirector(director);
+
+        Topic topic = topicRepository.findById(topicId);
+        movie.setTopic(topic);
+
+        Available available = availableRepository.findById(availableId);
+        movie.setAvailable(available);
+
+        Rent rent = rentRepository.findById(rentId);
+        List<Rent> list = new ArrayList<>();
+        list.addAll(movie.getRents());
+        list.add(rent);
+        movie.setRents(list);
+
+        movieRepository.save(movie);
+        MovieDTO movieDTO = new MovieDTO(movie.getId(), movie.getName(), movie.getDirector(),movie.getTopic(),movie.getAvailable(),movie.getRents());
+
         List<Movie> listDirector = new ArrayList<>();
         listDirector.addAll(director.getMovies());
         listDirector.add(movie);
         director.setMovies(listDirector);
         directorRepository.save(director);
 
-        Topic topic = topicRepository.findById(topicId);
-        movie.setTopic(topic);
         List<Movie> listTopic = new ArrayList<>();
         listTopic.addAll(topic.getMovies());
         listTopic.add(movie);
         topic.setMovies(listTopic);
         topicRepository.save(topic);
 
-        Available available = availableRepository.findById(availableId);
-        movie.setAvailable(available);
         if(availableId==1){
             Available availableNot = availableRepository.findById(availableId+1);
             availableNot.getMovies().remove(movie);
@@ -111,17 +121,8 @@ public class MovieService {
         available.setMovies(listAvailable);
         availableRepository.save(available);
 
-        Rent rent = rentRepository.findById(rentId);
-        List<Rent> list = new ArrayList<>();
-        list.addAll(movie.getRents());
-        list.add(rent);
-        movie.setRents(list);
         rent.setMovie(movie);
         rentRepository.save(rent);
-
-
-        movieRepository.save(movie);
-        MovieDTO movieDTO = new MovieDTO(movie.getId(), movie.getName(), movie.getDirector(),movie.getTopic(),movie.getAvailable(),movie.getRents());
 
         return movieDTO;
     }

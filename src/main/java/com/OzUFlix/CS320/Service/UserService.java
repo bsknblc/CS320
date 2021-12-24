@@ -74,36 +74,59 @@ public class UserService {
         return  userDTO;
     }
 
-    public UserDTO saveReturnMovie(int userId, int returnMovieId){
+    public UserDTO saveReturnMovie(int userId, int rentId, int returnMovieId){
         Return_Movie return_movie = return_movieRepository.findById(returnMovieId);
         User user = userRepository.findById(userId);
         List<Return_Movie> list = new ArrayList<>();
         list.addAll(user.getReturn_movies());
         list.add(return_movie);
         user.setReturn_movies(list);
-        userRepository.save(user);
-        UserDTO userDTO = new UserDTO(user.getId(),user.getName(),user.getPassword(),user.getUserType(),user.getRents(),user.getReturn_movies(),user.getPenalties());
+
+        Rent rent = rentRepository.findById(rentId);
+        rent.setReturn_movie(return_movie);
+
+        long difference_In_Time = rent.getDate().getTime() - return_movie.getDate().getTime();
+        long difference_In_Days = (difference_In_Time / (1000 * 60 * 60 * 24)) % 365;
+
+        if(difference_In_Days>20){
+            Penalty penalty = new Penalty();
+            penalty.setUser(user);
+            penalty.setRent(rent);
+            penalty.setReturn_movie(return_movie);
+            penaltyRepository.save(penalty);
+
+            List<Penalty> listPenalty = new ArrayList<>();
+            listPenalty.addAll(user.getPenalties());
+            listPenalty.add(penalty);
+            user.setPenalties(listPenalty);
+            rent.setPenalty(penalty);
+        }
 
         return_movie.setUser(user);
         return_movieRepository.save(return_movie);
+        rentRepository.save(rent);
+
+        userRepository.save(user);
+        UserDTO userDTO = new UserDTO(user.getId(),user.getName(),user.getPassword(),user.getUserType(),user.getRents(),user.getReturn_movies(),user.getPenalties());
 
         return  userDTO;
     }
 
-    public UserDTO savePenalty(int userId, int penaltyId){
-        Penalty penalty = penaltyRepository.findById(penaltyId);
+    public List<RentDTO> getUserRent(int userId){
         User user = userRepository.findById(userId);
-        List<Penalty> list = new ArrayList<>();
-        list.addAll(user.getPenalties());
-        list.add(penalty);
-        user.setPenalties(list);
-        userRepository.save(user);
-        UserDTO userDTO = new UserDTO(user.getId(),user.getName(),user.getPassword(),user.getUserType(),user.getRents(),user.getReturn_movies(),user.getPenalties());
+        List<Rent> rents = new ArrayList<>();
+        if(userRepository.getUserByUsertype(userId)!=null){
+            rents = rentRepository.findAll();
+        }else{
+            rents = userRepository.getRent(userId);
+        }
+        List<RentDTO> DTOs= new ArrayList<>();
+        for (Rent rent : rents){
+            RentDTO rentDTO = new RentDTO(rent.getId(),rent.getUser(),rent.getMovie(),rent.getDate(), rent.getPenalty(),rent.getReturn_movie());
+            DTOs.add(rentDTO);
+        }
 
-        penalty.setUser(user);
-        penaltyRepository.save(penalty);
-
-        return  userDTO;
+        return  DTOs;
     }
 
 
