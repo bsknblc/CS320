@@ -32,12 +32,12 @@ public class DirectorController {
     }
 
     @PostMapping
-    public Director saveDirector(@RequestBody Director director) {
+    public Director save(@RequestBody Director director) {
         return directorService.save(director);
     }
 
     @PostMapping("/{director-id}/movie/{movie-id}")
-    public DirectorDTO saveDirectorMovie(@PathVariable("director-id") int directorId, @PathVariable("movie-id") int movieId) {
+    public DirectorDTO saveDirector(@PathVariable("director-id") int directorId, @PathVariable("movie-id") int movieId) {
         return directorService.saveMovie(directorId, movieId);
     }
 }

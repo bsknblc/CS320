@@ -26,7 +26,7 @@ public class TopicController {
     public void deleteById(@PathVariable("topic-id") int id){ topicService.deleteById(id); }
 
     @PostMapping
-    public Topic saveTopic(@RequestBody Topic topic){
+    public Topic save(@RequestBody Topic topic){
         return topicService.save(topic);
     }
 

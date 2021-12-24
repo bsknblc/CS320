@@ -2,6 +2,7 @@ package com.OzUFlix.CS320.Controller;
 
 import com.OzUFlix.CS320.DTO.DirectorDTO;
 import com.OzUFlix.CS320.DTO.MovieDTO;
+import com.OzUFlix.CS320.Model.Available;
 import com.OzUFlix.CS320.Model.Movie;
 import com.OzUFlix.CS320.Service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class MovieController {
     @DeleteMapping("/{movie-id}")
     public void deleteById(@PathVariable("movie-id") int id){
         movieService.deleteById(id);
+    }
+
+    @PostMapping
+    public Movie save(Movie movie) {
+        return movieService.save(movie);
     }
 
     @PostMapping("/director/{director-id}/topic/{topic-id}")

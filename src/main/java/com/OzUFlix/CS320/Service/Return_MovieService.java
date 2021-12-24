@@ -27,6 +27,8 @@ public class Return_MovieService {
     @Autowired
     MovieRepository movieRepository;
 
+    public Return_Movie save(Return_Movie return_movie){ return return_movieRepository.save(return_movie);}
+
     public List<Return_MovieDTO> findAll(){
         List<Return_Movie> return_movies = return_movieRepository.findAll();
         List<Return_MovieDTO> return_movieDTOS = new ArrayList<>();

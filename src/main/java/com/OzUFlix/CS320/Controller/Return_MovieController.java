@@ -2,6 +2,7 @@ package com.OzUFlix.CS320.Controller;
 
 import com.OzUFlix.CS320.DTO.RentDTO;
 import com.OzUFlix.CS320.DTO.Return_MovieDTO;
+import com.OzUFlix.CS320.Model.Available;
 import com.OzUFlix.CS320.Model.Return_Movie;
 import com.OzUFlix.CS320.Service.Return_MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,11 @@ public class Return_MovieController {
 
     @DeleteMapping("/{Return_Movie-id}")
     public void deleteById(@PathVariable("Return_Movie-id") int id){ return_MovieService.deleteById(id); }
+
+    @PostMapping
+    public Return_Movie save(Return_Movie return_movie) {
+        return return_MovieService.save(return_movie);
+    }
 
     @PostMapping("/rent/{rent-id}")
     public Return_MovieDTO saveReturnMovie(@RequestBody Return_Movie returnMovie, @PathVariable("rent-id") int rentId) {

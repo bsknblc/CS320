@@ -30,7 +30,7 @@ public class UserController {
     public void deleteById(@PathVariable("user-id") int id){ userService.deleteById(id); }
 
     @PostMapping
-    public User saveUser(@RequestBody User user){
+    public User save(@RequestBody User user){
         return userService.save(user);
     }
 
@@ -40,6 +40,7 @@ public class UserController {
         return userService.validateUser(result[0], result[1]);
     }
 
+    /*
     @PostMapping("/{user-id}/rent/{rent-id}")
     public UserDTO saveUserRent(@PathVariable("user-id") int userId, @PathVariable("rent-id") int rentId) {
         return userService.saveRent(userId, rentId);
@@ -49,5 +50,6 @@ public class UserController {
     public UserDTO saveUserReturnMovie(@PathVariable("user-id") int userId, @PathVariable("rent-id") int rentId, @PathVariable("rent-id") int returnMovieId) {
         return userService.saveReturnMovie(userId, rentId, returnMovieId);
     }
+    */
 
 }

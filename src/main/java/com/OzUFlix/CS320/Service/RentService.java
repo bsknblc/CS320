@@ -29,6 +29,10 @@ public class RentService {
     @Autowired
     AvailableRepository availableRepository;
 
+    public Rent save(Rent rent){
+        return rentRepository.save(rent);
+    }
+
     public List<RentDTO> findAll(){
         List<Rent> rents = rentRepository.findAll();
         List<RentDTO> rentDTOS = new ArrayList<>();
