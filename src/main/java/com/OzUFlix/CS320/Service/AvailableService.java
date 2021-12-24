@@ -22,9 +22,26 @@ public class AvailableService {
     public Available save(Available available){ return availableRepository.save(available); }
 
     public AvailableDTO saveMovie(int movieId, int availableId){
-        availableRepository.findById(availableId).getMovies().add(movieRepository.getById(movieId));
-        availableRepository.save(availableRepository.findById(availableId));
-        return  findById(availableId);
+        Movie movie = movieRepository.findById(movieId);
+        Available available = availableRepository.findById(availableId);
+        List<Movie> list = new ArrayList<>();
+        list.addAll(available.getMovies());
+        if(availableId==1){
+            Available availableNot = availableRepository.findById(availableId+1);
+            availableNot.getMovies().remove(movie);
+        }else{
+            Available availableNot = availableRepository.findById(availableId-1);
+            availableNot.getMovies().remove(movie);
+        }
+        list.add(movie);
+        available.setMovies(list);
+        availableRepository.save(available);
+        AvailableDTO availableDTO = new AvailableDTO(available.getId(),available.getInfo(), available.getMovies());
+
+        movie.setAvailable(available);
+        movieRepository.save(movie);
+
+        return  availableDTO;
     }
 
     public List<AvailableDTO> findAll(){

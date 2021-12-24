@@ -33,8 +33,8 @@ public class AvailableController {
     }
 
 
-    @PutMapping("/{available-id}/movie/{movie-id}")
-    public AvailableDTO saveAvailableMovie(@PathVariable("available-id") int availableId,@PathVariable("available-id") int movieId) {
+    @PostMapping("/{available-id}/movie/{movie-id}")
+    public AvailableDTO saveAvailableMovie(@PathVariable("available-id") int availableId,@PathVariable("movie-id") int movieId) {
         return availableMovieService.saveMovie(movieId, availableId);
     }
 
