@@ -22,17 +22,14 @@ public class Movie {
 
     @JsonIgnore
     @ManyToOne
-    @NotNull
     private Director director;
 
     @JsonIgnore
     @ManyToOne
-    @NotNull
     private Topic topic;
 
     @JsonIgnore
     @ManyToOne
-    @NotNull
     private Available available;
 
     @JsonIgnore
