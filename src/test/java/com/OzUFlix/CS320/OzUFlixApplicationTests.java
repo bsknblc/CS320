@@ -150,8 +150,8 @@ class OzUFlixApplicationTests {
 
 
 
-		/*assertEquals(directorService.findById(1).getId(),director.getId());
-		assertEquals(availableService.findById(1).getMovies(),available.getMovies());
+		assertTrue(directorService.findById(director.getId()).getId()==director.getId());
+		/*assertEquals(availableService.findById(1).getMovies(),available.getMovies());
 		assertTrue(availableService.findById(1).getId()==available.getId());
 		assertTrue(availableService.findById(1).getInfo()==available.getInfo());
 		assertTrue(availableService.findById(2).equals(notAvailable));
