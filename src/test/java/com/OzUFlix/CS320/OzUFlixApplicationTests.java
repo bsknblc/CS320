@@ -76,6 +76,17 @@ class OzUFlixApplicationTests {
 		penalty.setRent(rent);
 		penalty.setReturn_movie(returnM);
 
+		availableService.save(available);
+		availableService.save(notAvailable);
+		directorService.save(director);
+		topicService.save(topic);
+		movieService.save(movie);
+		userService.save(manager);
+		userService.save(user);
+		rentService.save(rent);
+		return_movieService.save(returnM);
+		penaltyService.save(penalty);
+
 	}
 
 }
