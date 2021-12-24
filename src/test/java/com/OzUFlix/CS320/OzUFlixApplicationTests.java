@@ -132,6 +132,10 @@ class OzUFlixApplicationTests {
 		movie.setRents(rents);
 		penalty.setUser(user);
 
+		//availableService.saveMovie(movie.getId(),available.getId());
+		movieService.searchMovie(1);
+		movieService.searchMovie("Nolan");
+
 
 		availableService.save(available);
 		assertTrue(availableService.findAll()!=null);
