@@ -1,5 +1,6 @@
 package com.OzUFlix.CS320.Controller;
 
+import com.OzUFlix.CS320.DTO.DirectorDTO;
 import com.OzUFlix.CS320.DTO.MovieDTO;
 import com.OzUFlix.CS320.Model.Movie;
 import com.OzUFlix.CS320.Service.MovieService;
@@ -41,5 +42,10 @@ public class MovieController {
     @PostMapping
     public Movie saveMovie(@RequestBody Movie movie){
         return movieService.save(movie);
+    }
+
+    @PostMapping("/{movie-id}/director/{director-id}")
+    public MovieDTO saveMovieDirector(@PathVariable("movie-id") int movieId, @PathVariable("director-id") int directorId) {
+        return movieService.saveDirector(movieId, directorId);
     }
 }
