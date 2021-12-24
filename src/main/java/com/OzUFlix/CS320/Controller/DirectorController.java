@@ -22,7 +22,7 @@ public class DirectorController {
     }
 
     @GetMapping("/{director-id}")
-    public DirectorDTO getMovieById(@PathVariable("director-id") int id) {
+    public DirectorDTO getDirectorById(@PathVariable("director-id") int id) {
         return directorService.findById(id);
     }
 
@@ -32,7 +32,7 @@ public class DirectorController {
     }
 
     @PostMapping
-    public Director saveMovie(@RequestBody Director director) {
+    public Director saveDirector(@RequestBody Director director) {
         return directorService.save(director);
     }
 
