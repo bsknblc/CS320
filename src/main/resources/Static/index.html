@@ -7,10 +7,14 @@
 
 <p><i>Login</i></p>
 <p>
-    <button class="GFG"
-            onclick="window.location.href = 'http://localhost:8080/loginUser';">
+    <button id="myButton"  class="GFG">
         Login
     </button>
+    <script type="text/javascript">
+        document.getElementById("myButton").onclick = function () {
+            location.href = "loginUser.html";
+        };
+    </script>
 </p>
 
 <p><i>Sign Up</i></p>
