@@ -48,4 +48,20 @@ public class MovieController {
     public MovieDTO saveMovieDirector(@PathVariable("movie-id") int movieId, @PathVariable("director-id") int directorId) {
         return movieService.saveDirector(movieId, directorId);
     }
+
+    @PostMapping("/{movie-id}/topic/{topic-id}")
+    public MovieDTO saveMovieTopic(@PathVariable("movie-id") int movieId, @PathVariable("topic-id") int topicId) {
+        return movieService.saveTopic(movieId, topicId);
+    }
+
+    @PostMapping("/{movie-id}/available/{available-id}")
+    public MovieDTO saveMovieAvailable(@PathVariable("movie-id") int movieId, @PathVariable("available-id") int availableId) {
+        return movieService.saveAvailable(movieId, availableId);
+    }
+
+    @PostMapping("/{movie-id}/rent/{rent-id}")
+    public MovieDTO saveMovieRent(@PathVariable("movie-id") int movieId, @PathVariable("rent-id") int rentId) {
+        return movieService.saveRent(movieId, rentId);
+    }
+
 }
