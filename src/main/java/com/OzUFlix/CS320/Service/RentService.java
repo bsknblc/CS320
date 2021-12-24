@@ -1,5 +1,6 @@
 package com.OzUFlix.CS320.Service;
 
+import com.OzUFlix.CS320.DTO.MovieDTO;
 import com.OzUFlix.CS320.DTO.PenaltyDTO;
 import com.OzUFlix.CS320.DTO.RentDTO;
 import com.OzUFlix.CS320.Model.*;
@@ -65,18 +66,20 @@ public class RentService {
 
     public RentDTO saveMovie(int rentId, int movieId){
         Movie movie = movieRepository.findById(movieId);
-        Rent rent = rentRepository.findById(rentId);
-        rent.setMovie(movie);
-        rentRepository.save(rent);
-        RentDTO rentDTO = new RentDTO(rent.getId(),rent.getUser(),rent.getMovie(),rent.getDate(), rent.getPenalty(),rent.getReturn_movie());
+        if(movie.getAvailable().getInfo()==1) {
+            Rent rent = rentRepository.findById(rentId);
+            rent.setMovie(movie);
+            rentRepository.save(rent);
+            RentDTO rentDTO = new RentDTO(rent.getId(), rent.getUser(), rent.getMovie(), rent.getDate(), rent.getPenalty(), rent.getReturn_movie());
 
-        List<Rent> list = new ArrayList<>();
-        list.addAll(movie.getRents());
-        list.add(rent);
-        movie.setRents(list);
-        movieRepository.save(movie);
-
-        return  rentDTO;
+            List<Rent> list = new ArrayList<>();
+            list.addAll(movie.getRents());
+            list.add(rent);
+            movie.setRents(list);
+            movieRepository.save(movie);
+            return  rentDTO;
+        }
+        return  null;
     }
 
     public RentDTO saveDate(int rentId){
@@ -110,5 +113,26 @@ public class RentService {
         return_movie.setRent(rent);
         return_movieRepository.save(return_movie);
         return  rentDTO;
+    }
+
+    public MovieDTO getMost(){
+        int max = 0;
+        int maxIndex = 0;
+        List<Rent> rents = rentRepository.findAll();
+        int[] counts = new int[rents.size()];
+        for(Rent rent: rents){
+            counts[rent.getMovie().getId()-1] += 1;
+        }
+        for(int i = 0; i<counts.length;i++){
+            if (max<counts[i]){
+                max=counts[i];
+                maxIndex = i+1;
+            }
+        }
+
+        Movie movie = movieRepository.findById(maxIndex);
+        MovieDTO movieDTO = new MovieDTO(movie.getId(), movie.getName(), movie.getDirector(),movie.getTopic(),movie.getAvailable(),movie.getRents());
+
+        return movieDTO;
     }
 }

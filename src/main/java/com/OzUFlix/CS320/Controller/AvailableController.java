@@ -27,6 +27,11 @@ public class AvailableController {
         return availableMovieService.findById(id);
     }
 
+    @PostMapping
+    public Available save(Available available) {
+        return availableMovieService.save(available);
+    }
+
     @DeleteMapping("/{available-id}")
     public void deleteById(@PathVariable("available-id") int id) {
         availableMovieService.deleteById(id);

@@ -45,4 +45,7 @@ public class MovieController {
         return movieService.saveMovie(movie, directorId, topicId, availableId, rentId);
     }
 
+    @GetMapping("/remove/{movie-id}")
+    public List<MovieDTO> remove(@PathVariable("movie-id") int id){ return movieService.remove(id);}
+
 }

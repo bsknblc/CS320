@@ -19,6 +19,8 @@ public class AvailableService {
     @Autowired
     MovieRepository movieRepository;
 
+    public Available save(Available available){ return availableRepository.save(available);}
+
     public AvailableDTO saveMovie(int movieId, int availableId){
         Movie movie = movieRepository.findById(movieId);
         Available available = availableRepository.findById(availableId);

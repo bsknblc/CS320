@@ -1,5 +1,6 @@
 package com.OzUFlix.CS320.Controller;
 
+import com.OzUFlix.CS320.DTO.MovieDTO;
 import com.OzUFlix.CS320.DTO.PenaltyDTO;
 import com.OzUFlix.CS320.DTO.RentDTO;
 import com.OzUFlix.CS320.Model.Rent;
@@ -39,5 +40,8 @@ public class RentController {
     public RentDTO saveRentMovie(@PathVariable("rent-id") int rentId, @PathVariable("movie-id") int movieId) {
         return rentService.saveMovie(rentId, movieId);
     }
+
+    @GetMapping("/most")
+    public MovieDTO getMost() { return rentService.getMost(); }
 }
 
