@@ -2,7 +2,9 @@ package com.OzUFlix.CS320.Service;
 
 import com.OzUFlix.CS320.DTO.AvailableDTO;
 import com.OzUFlix.CS320.Model.Available;
+import com.OzUFlix.CS320.Model.Movie;
 import com.OzUFlix.CS320.Repository.AvailableRepository;
+import com.OzUFlix.CS320.Repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,16 @@ public class AvailableService {
     @Autowired
     AvailableRepository availableRepository;
 
+    @Autowired
+    MovieRepository movieRepository;
+
     public Available save(Available available){ return availableRepository.save(available); }
+
+    public AvailableDTO saveMovie(int movieId, int availableId){
+        availableRepository.findById(availableId).getMovies().add(movieRepository.getById(movieId));
+        availableRepository.save(availableRepository.findById(availableId));
+        return  findById(availableId);
+    }
 
     public List<AvailableDTO> findAll(){
         List<Available> availables = availableRepository.findAll();
