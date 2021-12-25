@@ -30,7 +30,9 @@ public class UserService {
     PenaltyRepository penaltyRepository;
 
     public User save(User user){
-        user.setUserType(0);
+        if(user.getUserType()!=1){
+            user.setUserType(0);
+        }
         return userRepository.save(user); }
 
     public List<UserDTO> findAll(){
@@ -60,7 +62,7 @@ public class UserService {
         }
         return  count;
     }
-
+/*
     public UserDTO saveRent(int userId, int rentId){
         Rent rent = rentRepository.findById(rentId);
         User user = userRepository.findById(userId);
@@ -131,5 +133,5 @@ public class UserService {
         return  DTOs;
     }
 
-
+*/
 }

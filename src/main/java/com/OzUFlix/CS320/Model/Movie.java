@@ -40,6 +40,12 @@ public class Movie {
     @NotNull
     private List<Rent> rents = new ArrayList<Rent>();
 
+    public Movie(){}
+
+    public Movie(String name) {
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }
