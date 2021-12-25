@@ -36,9 +36,15 @@ public class Movie {
     private Available available;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie", fetch = FetchType.EAGER)
     @NotNull
     private List<Rent> rents = new ArrayList<Rent>();
+
+    public Movie(){}
+
+    public Movie(String name) {
+        this.name = name;
+    }
 
     public int getId() {
         return id;
