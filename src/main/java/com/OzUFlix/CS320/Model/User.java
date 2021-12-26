@@ -28,17 +28,21 @@ public class User {
     @NotNull
     private int userType;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Rent> rents = new ArrayList<Rent>();
 
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
-    private List<Return_Movie> return_movies = new ArrayList<Return_Movie>();
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Penalty> penalties = new ArrayList<Penalty>();
+
+    public User(){}
+
+    public User(String name, String password) {
+        this.name = name;
+        this.password = password;
+    }
 
     public int getId() {
         return id;
@@ -78,14 +82,6 @@ public class User {
 
     public void setRents(List<Rent> rents) {
         this.rents = rents;
-    }
-
-    public List<Return_Movie> getReturn_movies() {
-        return return_movies;
-    }
-
-    public void setReturn_movies(List<Return_Movie> return_movies) {
-        this.return_movies = return_movies;
     }
 
     public List<Penalty> getPenalties() {

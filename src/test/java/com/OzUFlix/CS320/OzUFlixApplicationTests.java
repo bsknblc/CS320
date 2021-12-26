@@ -153,7 +153,7 @@ class OzUFlixApplicationTests {
 		userService.save(user);
 		assertTrue(userService.findAll()!=null);
 
-		rentService.saveRent(rent,2,1);
+		rentService.save(rent);
 		assertTrue(rentService.findAll()!=null);
 
 		return_movieService.save(returnM);
