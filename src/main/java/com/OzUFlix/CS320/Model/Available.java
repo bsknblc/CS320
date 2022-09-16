@@ -20,10 +20,6 @@ public class Available {
     @NotNull
     private int info;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "available", fetch = FetchType.EAGER)
-    private List<Movie> movies = new ArrayList<Movie>();
-
     public Available(){}
 
     public Available(int info) {
@@ -42,11 +38,4 @@ public class Available {
         this.info = info;
     }
 
-    public List<Movie> getMovies() {
-        return movies;
-    }
-
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
-    }
 }

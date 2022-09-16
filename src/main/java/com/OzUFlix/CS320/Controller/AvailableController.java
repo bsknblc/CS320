@@ -2,7 +2,6 @@ package com.OzUFlix.CS320.Controller;
 
 import com.OzUFlix.CS320.DTO.AvailableDTO;
 import com.OzUFlix.CS320.Model.Available;
-import com.OzUFlix.CS320.Model.Movie;
 import com.OzUFlix.CS320.Service.AvailableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,11 +35,5 @@ public class AvailableController {
         availableMovieService.deleteById(id);
     }
 
-    /*
-    @PostMapping("/{available-id}/movie/{movie-id}")
-    public AvailableDTO saveAvailableMovie(@PathVariable("available-id") int availableId,@PathVariable("movie-id") int movieId) {
-        return availableMovieService.saveMovie(movieId, availableId);
-    }
-*/
 }
 

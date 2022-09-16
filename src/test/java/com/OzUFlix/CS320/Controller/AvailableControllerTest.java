@@ -1,7 +1,6 @@
 package com.OzUFlix.CS320.Controller;
 
 import com.OzUFlix.CS320.DTO.AvailableDTO;
-import com.OzUFlix.CS320.DTO.UserDTO;
 import com.OzUFlix.CS320.Service.AvailableService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,7 +47,6 @@ class AvailableControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()").value(allAvailable.size()));
     }
-
 
 
     @Test

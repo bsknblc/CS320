@@ -1,6 +1,5 @@
 package com.OzUFlix.CS320.DTO;
 
-import com.OzUFlix.CS320.Model.Movie;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
@@ -11,13 +10,11 @@ import java.util.List;
 public class AvailableDTO {
     private int id;
     private int info;
-    private List<Movie> movies = new ArrayList<Movie>();
     public AvailableDTO(){}
 
-    public AvailableDTO(int id, int info, List<Movie> movies) {
+    public AvailableDTO(int id, int info) {
         this.id = id;
         this.info = info;
-        this.movies = movies;
     }
 
     public int getId() {
@@ -36,11 +33,4 @@ public class AvailableDTO {
         this.info = info;
     }
 
-    public List<Movie> getMovies() {
-        return movies;
-    }
-
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
-    }
 }
